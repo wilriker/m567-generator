@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>Mix Ratio Calculator</title>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link href="css/page.css" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+	<div class="container">
+		<h1>Mix Ratio Calculator</h1>
+		<div class="well">
+			<h4>Instructions
+				<button class="btn btn-sm btn-light" type="button" data-toggle="collapse" data-target="#instructions" aria-expanded="false" aria-controls="instructions">
+					Open/Close
+				</button>
+			</h4>
+			<div class="collapse" id="instructions"></div>
+		</div>
+		<form autocomplete="off" action="javascript:void(0);">
+			<h3>Settings</h3>
+			<div class="row">
+				<div class="col-md-2">
+					<label for="extruder_count">Extruder Count:</label>
+					<input type="number" class="form-control" id="extruder_count" required="required" value="1" min="1" step="any"/>
+				</div>
+				<div class="col-md-2">
+					<label for="tool_no">Tool No:</label>
+					<input type="number" class="form-control" id="tool_no" required="required" value="0" min="0" step="1"/>
+				</div>
+			</div>
+			<h3>Extruder Mix Ratios</h3>
+			<div class="row" id="extruders">
+				<div class="col-md-2" id="extruder_1">
+					<label for="extruder_ratio_1">Extruder 1:</label>
+					<div class="input-group">
+						<input type="number" class="form-control" id="extruder_ratio_1" required="required" value="100" min="0" step="any"/>
+						<span class="input-group-addon">%</span>
+					</div>
+				</div>
+			</div>
+			<div class="well well-lg">
+				<span id="result">M567 P0 E1.0</span>
+			</div>
+		</form>
+	</div>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
