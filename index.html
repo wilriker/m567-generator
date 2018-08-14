@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<title>Mix Ratio Calculator</title>
+	<title>M567 Generator</title>
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -22,7 +22,7 @@
 <body>
 
 	<div class="container">
-		<h1>Mix Ratio Calculator</h1>
+		<h1>M567 Generator</h1>
 		<div class="well hidden">
 			<h4>Instructions
 				<button class="btn btn-sm btn-light" type="button" data-toggle="collapse" data-target="#instructions" aria-expanded="false" aria-controls="instructions">
@@ -36,15 +36,18 @@
 			<div class="row">
 				<div class="col-md-2">
 					<label for="extruder_count">Extruder Count:</label>
-					<input type="number" class="form-control" id="extruder_count" required="required" value="1" min="1" step="any"/>
+					<input type="number" class="form-control" id="extruder_count" required="required" value="1" min="1" max="20" step="any"/>
 				</div>
 				<div class="col-md-2">
 					<label for="tool_no">Tool No:</label>
 					<input type="number" class="form-control" id="tool_no" required="required" value="0" min="0" step="1"/>
 				</div>
 				<div class="col-md-2">
-					<input type="checkbox" class="form-check-input" id="cap_at_100" checked="checked"/>
-					<label class="form-check-label" for="cap_at_100">Cap at 100% total</label>
+					<label for="cap_at">Cap at a total of:</label>
+					<div class="input-group">
+						<input type="number" class="form-control" id="cap_at" data-number="1" required="required" value="100" min="0" step="any"/>
+						<span class="input-group-addon">%</span>
+					</div>
 				</div>
 			</div>
 			<h3>Extruder Mix Ratios</h3>
@@ -58,7 +61,7 @@
 				</div>
 			</div>
 			<div class="well well-lg">
-				<span id="result">M567 P0 E1.0</span>
+				<span id="result">M567 P0 E1</span>
 			</div>
 		</form>
 	</div>

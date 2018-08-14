@@ -1,18 +1,23 @@
-(function(mixCalculator, $, undefined) {
+(function(m567Generator, $, undefined) {
 
-	let extruderCount = 1,
-		toolNo = 0;
+	let extruderCount = parseInt($('#extruder_count').val()),
+		toolNo = parseInt($('#tool_no').val()),
+		cap = parseInt($('#cap_at').val()),
+		total = cap;
 
 	let addExtruders = function(newExtruderCount) {
 		let container = $('#extruders');
 		for (let i = extruderCount; i < newExtruderCount; i++) {
 			let exNo = (i + 1),
 				exId = 'extruder_' + exNo,
-				exDiv = container.children().last().clone(true);
+				exRatioId = 'extruder_ratio_' + exNo,
+				exDiv = container.children().last().clone(true),
+				label = exDiv.children().first(),
+				input = exDiv.children().last().children().first();
 
-			exDiv.attr("id", exId);
-			exDiv.children().first().attr("for", "extruder_ratio_" + exNo).text("Extruder " + exNo + ":");
-			exDiv.children().last().children().first().attr("id", "extruder_ratio_" + exNo).val(0);
+			exDiv.attr('id', exId);
+			label.attr('for', exRatioId).text('Extruder ' + exNo + ':');
+			input.attr('id', exRatioId).attr('data-number', exNo).val(0);
 
 			container.append(exDiv);
 		}
@@ -37,32 +42,43 @@
 
 	let updateCommand = function() {
 		let mixRatio = '',
-			sep = ''
+			sep = '',
+			sum = 0;
 		$('[id^=extruder_ratio_').each(function() {
-			mixRatio += sep + (parseInt(this.value) / 100.0);
+			let v = this.valueAsNumber;
+			sum += v;
+
+			mixRatio += sep + (v / 100.0);
 			sep = ':';
 		});
-		$('#result').text("M567 P" + toolNo + " E" + mixRatio);
+		if (sum <= cap) {
+			$('#result').text("M567 P" + toolNo + " E" + mixRatio);
+		} else {
+			$('#result').text("The total of values exceeds the set limit.");
+		}
 	};
 
 	let registerChangeHandlers = function() {
 		$('#extruder_count').change(function() {
-			adjustExtruderFields(parseInt(this.value));
+			adjustExtruderFields(this.valueAsNumber);
 		});
 		$('#tool_no').change(function() {
-			toolNo = parseInt(this.value);
+			toolNo = this.valueAsNumber;
 			updateCommand();
 		});
 		$('#extruder_ratio_1').change(function() {
 			updateCommand();
 		});
+		$('#cap_at').change(function() {
+			cap = this.valueAsNumber;
+		});
 	};
 
-	mixCalculator.init = function() {
+	m567Generator.init = function() {
 		registerChangeHandlers();
 	}
-}(window.mixCalculator = window.mixCalculator || {}, jQuery));
+}(window.m567Generator = window.m567Generator || {}, jQuery));
 
 $(document).ready(function() {
-	mixCalculator.init();
+	m567Generator.init();
 });
